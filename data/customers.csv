@@ -1,5 +1,5 @@
 customer_id,first_name,last_name,phone,email,street,city,state,zip_code
-1,Debra,Burks,NULL,debra.burks@yahoo.com,9273 Thorne Ave. ,Orchard Park,NY,14127
+1,Debra,Burks,NULL,debra.burks@yahoo.com,9273 Thorne Ave. ,Brooklyn,NY,14127
 2,Kasha,Todd,NULL,kasha.todd@yahoo.com,910 Vine Street ,Campbell,CA,95008
 3,Tameka,Fisher,NULL,tameka.fisher@aol.com,769C Honey Creek St. ,Redondo Beach,CA,90278
 4,Daryl,Spence,NULL,daryl.spence@aol.com,988 Pearl Lane ,Uniondale,NY,11553

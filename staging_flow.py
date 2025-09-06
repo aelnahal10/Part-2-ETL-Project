@@ -2,7 +2,7 @@ import pandas as pd
 from config import get_engine
 from sqlalchemy import text
 from prefect import flow, task, get_run_logger
-import os
+
 
 # -------------------------
 # Task: Run SQL file (schema or staging)
@@ -34,11 +34,14 @@ def load_csv_to_staging(table_name: str, csv_path: str):
     try:
         df = pd.read_csv(csv_path)
         engine = get_engine()
-        df.to_sql(table_name, con=engine, schema='dbo', if_exists='replace', index=False)
+        with engine.begin() as conn:
+            conn.execute(text(f"TRUNCATE TABLE {table_name}"))  # Prevent duplicates
+            df.to_sql(table_name, con=conn, if_exists="append", index=False)
         logger.info(f"✅ Loaded {len(df)} records into {table_name}")
     except Exception as e:
         logger.error(f"❌ Error loading {csv_path} → {table_name}: {e}")
         raise
+
 
 # -------------------------
 # Flow: Load all staging data

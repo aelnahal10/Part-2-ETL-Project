@@ -42,7 +42,7 @@ CREATE TABLE dim_staff (
     staff_id INT NOT NULL,                       -- OLTP staff ID
     full_name NVARCHAR(200),                     -- Full name
     email NVARCHAR(200),                         -- Email address
-    active BIT,                                  -- 0 = inactive, 1 = active
+    phone INT,                                  -- 0 = inactive, 1 = active
     store_id INT,                                -- OLTP store ID (FK not enforced here)
     manager_id INT,                              -- Self-reference or hierarchy
     start_date DATE,                             -- SCD2 start date
