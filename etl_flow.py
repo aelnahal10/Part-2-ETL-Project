@@ -4,7 +4,7 @@ from sqlalchemy import text
 from prefect import flow, task, get_run_logger
 from tasks.scd_type1 import update_dim_store, update_dim_product
 from tasks.scd_type2 import update_dim_customer, update_dim_staff
-
+from tasks.fact_table import reload_recent_fact_sales
 # -------------------------
 # Task: Run SQL file (schema or staging)
 # -------------------------
@@ -61,7 +61,7 @@ def load_staging_flow():
     load_csv_to_staging("stg_stores", "data/stores.csv")
 
     # Build the Date Dimension
-    run_sql_script("sql/build_dim_date.sql")
+    #run_sql_script("sql/build_dim_date.sql")
     
     # Run SCD Type 2 updates
     update_dim_customer()
@@ -72,7 +72,7 @@ def load_staging_flow():
     update_dim_product()
 
     # Run Fact SQL scripts
-    run_sql_script("sql/insert_fact_table.sql")
+    reload_recent_fact_sales()
 
     
 # -------------------------

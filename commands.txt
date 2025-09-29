@@ -1,0 +1,9 @@
+Prefect server start # start the server
+
+prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api # set API URL
+
+prefect work-pool create --type process etl-pool # Create a work pool named "etl-pool" of type "process"
+
+prefect worker start --pool etl-pool # Start the worker that listens to the "etl-pool" work pool
+
+prefect deploy etl_flow.py:load_staging_flow  --name "daily-etl-9am"   --pool etl-pool   --cron "0 9 * * *"   --timezone "Europe/London" # deploy pipeline with scehule at 9 am daily

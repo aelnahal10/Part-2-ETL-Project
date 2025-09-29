@@ -1,6 +1,6 @@
 from prefect import task, get_run_logger
 from sqlalchemy import text
-from config import engine
+from config import get_engine
 
 @task
 def reload_recent_fact_sales():
@@ -50,7 +50,7 @@ def reload_recent_fact_sales():
     JOIN dim_date dd ON o.order_date = dd.full_date
     WHERE dd.full_date BETWEEN CAST(GETDATE() - 30 AS DATE) AND CAST(GETDATE() AS DATE);
     """
-
+    engine = get_engine()
     with engine.begin() as conn:
         conn.execute(text(sql))
 
